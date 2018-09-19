@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="file">
+    <br>
+    原图
+    <div id="origin"></div>
+    压缩后
+    <div id="compress"></div>
+    <script type="module">
+        import {imageZip, fileToImage, fileToDataURL, fileZip} from './lib/index.js'
+        let file = document.querySelector('input');
+        file.onchange = function () {
+            let imgFile = this.files[0];
+            // 生成base64
+            fileToDataURL(imgFile)
+            .then(url => console.log(url))
+
+            // file压缩
+            fileZip(imgFile)
+            .then(file => {
+                console.log('压缩前 ===>', imgFile.size)
+                console.log('压缩后 ===>', file.size)
+            })
+
+            // file转成image
+            fileToImage(imgFile, true)
+            .then(image => {
+                document.getElementById('origin').appendChild(image)
+                // 图片压缩
+                return imageZip(image)
+            })
+            .then(image => {
+                document.getElementById('compress').appendChild(image)
+            })
+        }
+    </script>
+</body>
+
+</html>
