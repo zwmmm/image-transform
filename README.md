@@ -5,7 +5,7 @@
 ## Install
 
 npm:
-`npm install imageTransform --save`
+`npm install images-transform --save`
 
 ## Usage
 
