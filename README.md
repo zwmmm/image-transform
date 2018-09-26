@@ -4,7 +4,6 @@
 
 ## Install
 
-npm:
 `npm install images-transform --save`
 
 ## Usage
